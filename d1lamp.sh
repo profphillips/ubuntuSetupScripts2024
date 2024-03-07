@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# d1lamp.sh developed by John Phillips 20160904 and updated 20240307
+# This version is for Ubuntu Server 22.04 running on Virtual Box or AWS
+# Configures a basic LAMP server using Apache 2, MySQL, PHP8.1, Perl and Python3.
+# Creates a test user and several test scripts.
 
 starttime=$(date "+%s")
 newusername='jdoe'
@@ -22,7 +26,7 @@ update_system() {
 
 # Function to set the hostname
 set_hostname() {
-	# local hostname = "$1"
+	# local hostname="$1"
 	print_separator
     echo "---- SETTING HOST NAME TO $hostname"
     hostnamectl set-hostname "$hostname"
@@ -58,8 +62,6 @@ create_skel_test_files() {
 	echo 'print ("Content-type: text/html\n\n")' >> /etc/skel/public_html/test/pythontest.py
 	echo 'print ("Hello from Python\n")' >> /etc/skel/public_html/test/pythontest.py
 	chmod 755 /etc/skel/public_html/test/pythontest.py
-
-
 	print_separator	
 }
 
@@ -81,7 +83,7 @@ install_utilities() {
 	print_separator
 }
 
-# Functions to install compilers (add more as needed)
+# Function to install Perl
 install_perl() {
 	print_separator
 	echo '----PERL IS PREINSTALLED / INSTALL MYSQL DRIVER'
@@ -90,6 +92,7 @@ install_perl() {
 	print_separator	
 }
 
+# Function to install Python3
 install_python3() {
 	print_separator
 	echo '---- PYTHON AND PYTHON3 ARE PREINSTALLED / INSTALL MYSQL DRIVER'
@@ -97,7 +100,6 @@ install_python3() {
 	apt-get -qq install -y python3-mysqldb
 	print_separator	
 }
-
 
 # Install web server with php
 install_web_server() {
@@ -183,3 +185,4 @@ install_web_server
 install_database_server
 print_footer
 
+# end of script
