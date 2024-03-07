@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 starttime=$(date "+%s")
 newusername='jdoe'
 userpw='mypw'
